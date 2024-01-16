@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 map.on('click', function () {
                     resetSidebar();
                 });
+
+                // Initial population of sidebar with all teams
+                resetSidebar();
             })
             .catch(error => console.error('Error fetching data:', error));
     }
