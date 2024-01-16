@@ -27,7 +27,7 @@
 
         #container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             margin: 10px;
             height: 80vh;
         }
@@ -43,11 +43,11 @@
         }
 
         #map {
-            height: calc(100% - 40px); /* Adjusted height */
+            height: 60%;
             width: 65%;
-            border: 4px solid #2c3e50;
+            border: 4px solid #2c3e50; /* Changed border color */
             border-radius: 40px;
-            margin-right: 10px; /* Moved margin-right from #teamInfo to #map */
+            margin-bottom: 10px;
         }
 
         #resetButton {
