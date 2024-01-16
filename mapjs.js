@@ -41,18 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 });
 
-                map.on('click', function (event) {
-                    var latlng = map.mouseEventToLatLng(event.originalEvent);
-                    var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
-                    resetSidebar();
-
-                    if (teamsAtLocation.length > 0) {
-                        updateSidebar(teamsAtLocation);
-                    } else {
-                        resetSidebar();
-                    }
-                });
-
                 resetSidebar();
             })
             .catch(error => console.error('Error fetching data:', error));
