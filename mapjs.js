@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     function clearSidebar() {
             document.getElementById('teamInfo').innerHTML = '';
+            console.error('clear sidebar', error)
         }
     function resetSidebar() {
         clearSidebar();
@@ -72,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function updateSidebar(teams) {
         clearSidebar();
-        console.error('clear sidebar', error)
         
         teams.forEach(function (team) {
             var teamBox = createTeamBox(team);
