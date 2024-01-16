@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     function updateSidebar(teams) {
-        clearSidebar()
+        clearSidebar();
         console.error('clear sidebar', error)
         
         teams.forEach(function (team) {
