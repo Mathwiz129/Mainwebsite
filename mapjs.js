@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var map = L.map('map').setView([35.85, -86.66], 7);
     var markers;
     var data;
+    var selectedLocation;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -22,18 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 data.forEach(function (team) {
                     var marker = L.marker([team.lat, team.lon]).addTo(markers);
 
-                    // Customize the popup content with team information
-                    marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
-
                     // Handle click event on marker
                     marker.on('click', function () {
                         var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
                         clearSidebar();
+
                         if (teamsAtLocation.length > 1) {
                             updateSidebar(teamsAtLocation);
+                            selectedLocation = { lat: team.lat, lon: team.lon };
                         } else {
                             updateSidebar([team]);
+                            selectedLocation = null;
                         }
+
                         zoomToTeam(team);
                     });
 
@@ -50,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Close sidebar when clicking on map background
                 map.on('click', function () {
                     resetSidebar();
+                    selectedLocation = null;
                 });
 
                 // Initial population of sidebar with all teams
@@ -65,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.addEventListener('click', function (event) {
         if (!event.target.closest('#mapside')) {
             resetSidebar();
+            selectedLocation = null;
         }
     });
 
@@ -116,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function resetMap() {
         map.setView([35.85, -86.66], 7);
         resetSidebar(); // Reset sidebar when clicking the reset map button
+        selectedLocation = null;
     }
 
     // Expose necessary functions or variables globally if needed
