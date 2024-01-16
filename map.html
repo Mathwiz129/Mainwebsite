@@ -111,6 +111,20 @@
             map.on('click', function () {
                 clearHighlight();
             });
+
+            // Close sidebar when clicking outside the map or on the map
+            document.addEventListener('click', function (event) {
+                if (!event.target.closest('#mapside')) {
+                    clearHighlight();
+                }
+            });
+
+            // Close sidebar when clicking on the blank space of the team sidebar
+            document.getElementById('teamInfo').addEventListener('click', function (event) {
+                if (event.target.id === 'teamInfo') {
+                    clearHighlight();
+                }
+            });
         })
         .catch(error => console.error('Error fetching data:', error));
 
