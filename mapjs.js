@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     function clearSidebar() {
             document.getElementById('teamInfo').innerHTML = '';
-            console.error('clear sidebar', error)
         }
     function resetSidebar() {
         clearSidebar();
