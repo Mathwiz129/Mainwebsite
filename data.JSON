@@ -63,13 +63,13 @@
     "lon": "-86.952610"
   },
   {
-    "name": "Lynx Robotics",
-    "number": "10391",
-    "location": "Memphis, TN 38120 USA",
-    "rookie": "2015",
+    "name": "(should be lynx but test for multi)",
+    "number": "18714",
+    "location": "Nashville, TN 37221 USA",
+    "rookie": "2020",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "36.068030",
+    "lon": "-86.952610"
   },
   {
     "name": "MAGNETUDE BLACK",

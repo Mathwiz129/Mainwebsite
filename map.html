@@ -8,7 +8,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tennessee FTC Teams Map</title>
-    
 </head>
 <body>
 
@@ -24,8 +23,6 @@
     </div>
 </div>
 
-
-
 <script>
     var map = L.map('map').setView([35.85, -86.66], 7);
 
@@ -37,10 +34,21 @@
     fetch('data.JSON')
         .then(response => response.json())
         .then(data => {
+            // Create a dictionary to store teams at the same location
+            var teamDictionary = {};
+
             // Add markers for each robotics team
             var markers = L.layerGroup().addTo(map);
 
             data.forEach(function (team) {
+                var key = team.lat + "_" + team.lon;
+
+                if (teamDictionary[key] === undefined) {
+                    teamDictionary[key] = [];
+                }
+
+                teamDictionary[key].push(team);
+
                 var marker = L.marker([team.lat, team.lon]).addTo(markers);
 
                 // Customize the popup content with team information
@@ -48,7 +56,7 @@
 
                 // Handle click event on marker
                 marker.on('click', function () {
-                    zoomToTeam(team);
+                    showTeamsAtLocation(key);
                 });
 
                 // Handle hover events
@@ -59,17 +67,26 @@
                 marker.on('mouseout', function () {
                     marker.closePopup();
                 });
-
-                // Add team information to the team info box
-                var teamBox = document.createElement('div');
-                teamBox.className = 'teamBox';
-                teamBox.innerHTML = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
-                teamBox.addEventListener('click', function () {
-                    zoomToTeam(team);
-                });
-
-                document.getElementById('teamInfo').appendChild(teamBox);
             });
+
+            function showTeamsAtLocation(key) {
+                var teams = teamDictionary[key];
+
+                // Update the team info box with teams at the same location
+                var teamInfoBox = document.getElementById('teamInfo');
+                teamInfoBox.innerHTML = '';
+
+                teams.forEach(function (team) {
+                    var teamBox = document.createElement('div');
+                    teamBox.className = 'teamBox';
+                    teamBox.innerHTML = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
+                    teamBox.addEventListener('click', function () {
+                        zoomToTeam(team);
+                    });
+
+                    teamInfoBox.appendChild(teamBox);
+                });
+            }
 
             // Close sidebar when clicking on map background
             map.on('click', function () {
@@ -89,14 +106,14 @@
         });
 
         // Clear highlight in the team info box
-        var teamBoxes = document.getElementsByClassName('teamBox');
-        Array.from(teamBoxes).forEach(box => {
-            box.style.backgroundColor = '#f8f8f8';
-        });
+        var teamInfoBox = document.getElementById('teamInfo');
+        teamInfoBox.innerHTML = '';
     }
+
     function resetMap() {
         map.setView([35.85, -86.66], 7);
     }
 </script>
 
+</body>
 </html>
