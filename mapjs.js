@@ -20,24 +20,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 markers = L.layerGroup().addTo(map);
 
                 data.forEach(function (team) {
-                    var marker = L.marker([team.lat, team.lon]).addTo(markers);
-
+                    var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
+                    
+                    var marker = L.marker([team.lat, team.lon], {
+                        icon: L.divIcon({
+                            className: 'custom-div-icon',
+                            html: `<div class="marker-pin">${teamsAtLocation.length}</div><b>${team.name}</b>`,
+                            iconSize: [30, 42],
+                            iconAnchor: [15, 42],
+                            popupAnchor: [0, -42]
+                        })
+                    }).addTo(markers);
+                
                     // Customize the popup content with team information
                     marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
-
+                
                     // Handle click event on marker
                     marker.on('click', function () {
-                        var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
                         clearSidebar();
                         updateSidebar(teamsAtLocation);
                         zoomToTeam(team);
                     });
-
+                
                     // Handle hover events
                     marker.on('mouseover', function () {
                         marker.openPopup();
                     });
-
+                
                     marker.on('mouseout', function () {
                         marker.closePopup();
                     });
