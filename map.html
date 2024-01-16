@@ -75,98 +75,71 @@
 <script>
     var map = L.map('map').setView([35.85, -86.66], 7);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-// Fetch data from the JSON file
-fetch('data.JSON')
-    .then(response => response.json())
-    .then(data => {
-        // Add markers for each robotics team
-        var markers = L.layerGroup().addTo(map);
+    // Fetch data from the JSON file
+    fetch('data.JSON')
+        .then(response => response.json())
+        .then(data => {
+            // Add markers for each robotics team
+            var markers = L.layerGroup().addTo(map);
 
-        data.forEach(function (team) {
-            var marker = L.marker([team.lat, team.lon]).addTo(markers);
+            data.forEach(function (team) {
+                var marker = L.marker([team.lat, team.lon]).addTo(markers);
 
-            // Customize the popup content with team information
-            marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Stats: ${team.stats}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
+                // Customize the popup content with team information
+                marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Stats: ${team.stats}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
 
-            // Handle click event on marker
-            marker.on('click', function () {
-                highlightTeam(team);
+                // Handle click event on marker
+                marker.on('click', function () {
+                    zoomToTeam(team);
+                });
+
+                // Handle hover events
+                marker.on('mouseover', function () {
+                    marker.openPopup();
+                });
+
+                marker.on('mouseout', function () {
+                    marker.closePopup();
+                });
+
+                // Add team information to the team info box
+                var teamBox = document.createElement('div');
+                teamBox.className = 'teamBox';
+                teamBox.innerHTML = `<b>${team.name}</b><br>Stats: ${team.stats}`;
+                teamBox.addEventListener('click', function () {
+                    zoomToTeam(team);
+                });
+
+                document.getElementById('teamInfo').appendChild(teamBox);
             });
 
-            // Handle hover events
-            marker.on('mouseover', function () {
-                marker.openPopup();
+            // Close sidebar when clicking on map background
+            map.on('click', function () {
+                clearHighlight();
             });
+        })
+        .catch(error => console.error('Error fetching data:', error));
 
-            marker.on('mouseout', function () {
-                marker.closePopup();
-            });
+    function zoomToTeam(team) {
+        map.setView([team.lat, team.lon], 15);  // Zoom to the selected team's location
+    }
 
-            // Add team information to the team info box
-            var teamBox = document.createElement('div');
-            teamBox.className = 'teamBox';
-            teamBox.innerHTML = `<b>${team.name}</b><br>Stats: ${team.stats}`;
-            teamBox.addEventListener('click', function () {
-                highlightTeam(team);
-            });
-
-            document.getElementById('teamInfo').appendChild(teamBox);
+    function clearHighlight() {
+        // Clear highlight on the map
+        markers.eachLayer(marker => {
+            marker.closePopup();
         });
 
-        // Close sidebar when clicking on map background
-        map.on('click', function () {
-            clearHighlight();
+        // Clear highlight in the team info box
+        var teamBoxes = document.getElementsByClassName('teamBox');
+        Array.from(teamBoxes).forEach(box => {
+            box.style.backgroundColor = '#f8f8f8';
         });
-    })
-    .catch(error => console.error('Error fetching data:', error));
-
-function highlightTeam(team) {
-    // Highlight team on the map
-    clearHighlight();  // Clear previous highlight
-    var teamMarker = markers.getLayers().find(marker => marker.getPopup().getContent().includes(team.name));
-    teamMarker.setIcon(yellowIcon);  // Change marker color to yellow
-    teamMarker.openPopup();  // Open popup to highlight
-    map.setView([team.lat, team.lon], 15);  // Zoom to the selected team's location
-}
-
-function clearHighlight() {
-    // Clear highlight on the map
-    markers.eachLayer(marker => {
-        marker.setIcon(defaultIcon);  // Reset marker color
-        marker.closePopup();
-    });
-
-    // Clear highlight in the team info box
-    var teamBoxes = document.getElementsByClassName('teamBox');
-    Array.from(teamBoxes).forEach(box => {
-        box.style.backgroundColor = '#f8f8f8';
-    });
-}
-
-// Default icon
-var defaultIcon = L.icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
-    shadowUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png'
-});
-
-// Yellow icon
-var yellowIcon = L.icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
-    shadowUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png'
-});
-
+    }
 </script>
 
 </body>
