@@ -1,9 +1,7 @@
-// mapjs.js
-
-
 document.addEventListener('DOMContentLoaded', function () {
     var map = L.map('map').setView([35.85, -86.66], 7);
     var markers;
+    var data; // Declare data globally
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -13,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Fetch data from the JSON file
         fetch('data.JSON')
             .then(response => response.json())
-            .then(data => {
+            .then(dataResponse => {
+                data = dataResponse; // Assign data globally
                 // Add markers for each robotics team
                 markers = L.layerGroup().addTo(map);
 
