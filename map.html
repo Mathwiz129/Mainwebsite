@@ -55,21 +55,17 @@
             });
 
             // Add search control with live highlighting and autocomplete dropdown
-            var searchControl = new L.Control.Search({
+           var searchControl = new L.Control.Search({
                 layer: markers,
                 propertyName: 'name',
                 marker: false,
                 moveToLocation: function (latlng, title, map) {
-                    map.setView(latlng, 15); // Adjust the zoom level as needed
+                    map.setView(latlng, 15);
                 },
-                filterData: function (text, records) {
-                    return records.filter(function (record) {
-                        return record.name.toLowerCase().includes(text.toLowerCase());
-                    });
-                },
-                autoType: false, // Disable auto-type behavior
-                autoCollapse: true, // Collapse the search control on selecting a result
+                autoType: false,
+                autoCollapse: true,
             });
+
 
             map.addControl(searchControl);
         })
