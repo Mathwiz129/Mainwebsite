@@ -33,7 +33,7 @@
             data.forEach(function (team) {
                 var marker = L.marker([team.lat, team.lon]).addTo(map);
                 // Customize the popup content with team information
-                marker.bindPopup(`<b>${team.name}</b><br>Stats: ${team.stats}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
+                marker.bindPopup(`<b>${team.name}</b>Number:<b>${team.number}</b><br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
             });
         })
         .catch(error => console.error('Error fetching data:', error));
