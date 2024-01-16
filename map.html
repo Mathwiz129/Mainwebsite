@@ -69,6 +69,22 @@
                 });
             });
 
+            function showAllTeams() {
+                var teamInfoBox = document.getElementById('teamInfo');
+                teamInfoBox.innerHTML = '';
+
+                data.forEach(function (team) {
+                    var teamBox = document.createElement('div');
+                    teamBox.className = 'teamBox';
+                    teamBox.innerHTML = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
+                    teamBox.addEventListener('click', function () {
+                        zoomToTeam(team);
+                    });
+
+                    teamInfoBox.appendChild(teamBox);
+                });
+            }
+
             function showTeamsAtLocation(key) {
                 var teams = teamDictionary[key];
 
@@ -88,6 +104,9 @@
                 });
             }
 
+            // Show all teams initially
+            showAllTeams();
+
             // Close sidebar when clicking on map background
             map.on('click', function () {
                 clearHighlight();
@@ -105,13 +124,14 @@
             marker.closePopup();
         });
 
-        // Clear highlight in the team info box
-        var teamInfoBox = document.getElementById('teamInfo');
-        teamInfoBox.innerHTML = '';
+        // Show all teams in the sidebar
+        showAllTeams();
     }
 
     function resetMap() {
         map.setView([35.85, -86.66], 7);
+        // Show all teams when resetting the map
+        showAllTeams();
     }
 </script>
 
