@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://unpkg.com/leaflet-search@2.9.10/dist/leaflet-search.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tennessee FTC Teams Map</title>
-    <!-- Custom CSS for map container -->
+    <!-- Custom CSS for map container and team info box -->
     <style>
         body {
             margin: 0;
@@ -26,27 +25,39 @@
             margin-bottom: 20px;
         }
 
-        #map {
-            height: 500px;
-            width: 60%;
-            position: absolute;
-            right: 0;
-            border: 4px solid #000000;
-            border-radius: 40px;
-            padding: 10px;
+        #container {
+            display: flex;
+            justify-content: space-between;
+            height: 100vh;
         }
 
-        #sidebar {
-            position: absolute;
-            top: 0;
-            right: 0;
+        #map {
             height: 100%;
-            width: 0;
+            width: 60%;
+            border: 4px solid #000000;
+            border-radius: 40px;
+        }
+
+        #teamInfo {
+            width: 40%;
             background-color: #ffffff;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 20px;
+            padding: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            overflow-y: auto;
+        }
+
+        .teamBox {
+            background-color: #f8f8f8;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .teamBox:hover {
+            background-color: #e0e0e0;
         }
     </style>
 </head>
@@ -54,8 +65,10 @@
 
 <div id="title">Tennessee FTC Teams Map</div>
 
-<div id="map"></div>
-<div id="sidebar"></div>
+<div id="container">
+    <div id="map"></div>
+    <div id="teamInfo"></div>
+</div>
 
 <script>
     var map = L.map('map').setView([35.85, -86.66], 7);
@@ -79,7 +92,7 @@
 
                 // Handle click event on marker
                 marker.on('click', function () {
-                    openSidebar(team);
+                    highlightTeam(team);
                 });
 
                 // Handle hover events
@@ -90,27 +103,47 @@
                 marker.on('mouseout', function () {
                     marker.closePopup();
                 });
+
+                // Add team information to the team info box
+                var teamBox = document.createElement('div');
+                teamBox.className = 'teamBox';
+                teamBox.innerHTML = `<b>${team.name}</b><br>Stats: ${team.stats}`;
+                teamBox.addEventListener('click', function () {
+                    highlightTeam(team);
+                });
+
+                document.getElementById('teamInfo').appendChild(teamBox);
             });
 
             // Close sidebar when clicking on map background
             map.on('click', function () {
-                closeSidebar();
+                clearHighlight();
             });
         })
         .catch(error => console.error('Error fetching data:', error));
 
-    function openSidebar(team) {
-        // Populate sidebar with team information
-        var sidebarContent = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Stats: ${team.stats}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
+    function highlightTeam(team) {
+        // Highlight team on the map
+        clearHighlight();  // Clear previous highlight
+        var teamMarker = markers.getLayers().find(marker => marker.getPopup().getContent().includes(team.name));
+        teamMarker.openPopup();  // Open popup to highlight
 
-        // Display sidebar
-        document.getElementById('sidebar').style.width = '300px';
-        document.getElementById('sidebar').innerHTML = sidebarContent;
+        // Highlight team in the team info box
+        var teamBoxes = document.getElementsByClassName('teamBox');
+        Array.from(teamBoxes).forEach(box => {
+            box.style.backgroundColor = box.innerHTML.includes(team.name) ? '#e0e0e0' : '#f8f8f8';
+        });
     }
 
-    function closeSidebar() {
-        // Close sidebar
-        document.getElementById('sidebar').style.width = '0';
+    function clearHighlight() {
+        // Clear highlight on the map
+        markers.eachLayer(marker => marker.closePopup());
+
+        // Clear highlight in the team info box
+        var teamBoxes = document.getElementsByClassName('teamBox');
+        Array.from(teamBoxes).forEach(box => {
+            box.style.backgroundColor = '#f8f8f8';
+        });
     }
 </script>
 
