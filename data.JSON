@@ -2,38 +2,181 @@
   {
     "name": "4-H Gear Grinders",
     "number": "18689",
-    "location":"Chattanooga, TN 37416 USA",
+    "location": "Chattanooga, TN 37416 USA",
     "rookie": "2020",
     "website": "",
-    "lat": 35.092990,
-    "lon": -85.1831302
+    "lat": "35.092991",
+    "lon": "-85.183128"
   },
   {
     "name": "Burro Bots",
     "number": "18832",
-    "location":"Nashville, TN 37215 USA",
+    "location": "Nashville, TN 37215 USA",
     "rookie": "2020",
     "website": "",
-    "lat": 36.095290,
-    "lon": -86.824160
+    "lat": "36.095290",
+    "lon": "-86.824160"
   },
   {
     "name": "Cordova Eagles",
     "number": "21673",
-    "location":"Memphis, TN 38103 USA",
+    "location": "Memphis, TN 38103 USA",
     "rookie": "2022",
     "website": "",
-    "lat": 35.145700,
-    "lon": -90.052630
+    "lat": "35.145700",
+    "lon": "-90.052630"
   },
   {
     "name": "Electric Wave",
     "number": "7783",
-    "location":"Memphis, TN 38120 USA",
+    "location": "Memphis, TN 38120 USA",
     "rookie": "2013",
     "website": "",
-    "lat": 35.118410,
-    "lon": -89.864050
+    "lat": "35.118410",
+    "lon": "-89.864050"
+  },
+  {
+    "name": "Hawk Bots",
+    "number": "24781",
+    "location": "Knoxville, TN 37932 USA",
+    "rookie": "2023",
+    "website": "",
+    "lat": "35.932560",
+    "lon": "-84.165040"
+  },
+  {
+    "name": "LadyBots",
+    "number": "9912",
+    "location": "Nashville, TN 37205 USA",
+    "rookie": "2015",
+    "website": "",
+    "lat": "36.116040",
+    "lon": "-86.864860"
+  },
+  {
+    "name": "Lawson Green Lightning",
+    "number": "18714",
+    "location": "Nashville, TN 37221 USA",
+    "rookie": "2020",
+    "website": "",
+    "lat": "36.068030",
+    "lon": "-86.952610"
+  },
+  {
+    "name": "Lynx Robotics",
+    "number": "10391",
+    "location": "Memphis, TN 38120 USA",
+    "rookie": "2015",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "MAGNETUDE BLACK",
+    "number": "16811",
+    "location": "Murfreesboro, TN 37130 USA",
+    "rookie": "2019",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "MAGNETUDE GOLD",
+    "number": "17108",
+    "location": "Murfreesboro, TN 37130 USA",
+    "rookie": "2019",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "MUS Robotics",
+    "number": "6073",
+    "location": "Memphis, TN 38119 USA",
+    "rookie": "2012",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "Ministry of Mechanics",
+    "number": "22449",
+    "location": "Cleveland, TN 37312 USA",
+    "rookie": "2022",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "Ohm Raiders",
+    "number": "11468",
+    "location": "Chattanooga, TN 37405 USA",
+    "rookie": "2016",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "SHARP",
+    "number": "8411",
+    "location": "Spring Hill, TN 37174 USA",
+    "rookie": "2014",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "Small Town Robotics",
+    "number": "14291",
+    "location": "Shelbyville, TN 37160 USA",
+    "rookie": "2017",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "SoKno Robo Junior",
+    "number": "18687",
+    "location": "Knoxville, TN 37920 USA",
+    "rookie": "2020",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "Soaring Hawks",
+    "number": "24780",
+    "location": "Knoxville, TN 37932 USA",
+    "rookie": "2023",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "TechNova",
+    "number": "12611",
+    "location": "Brentwood, TN 37027 USA",
+    "rookie": "2017",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "Techalorians",
+    "number": "21530",
+    "location": "Cordova, TN 38016 USA",
+    "rookie": "2022",
+    "website": "",
+    "lat": "",
+    "lon": ""
+  },
+  {
+    "name": "Techno Geckos",
+    "number": "23926",
+    "location": "Watauga, TN 37694 USA",
+    "rookie": "2023",
+    "website": "",
+    "lat": "",
+    "lon": ""
   }
-  
 ]
