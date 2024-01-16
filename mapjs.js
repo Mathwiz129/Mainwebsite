@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var map = L.map('map').setView([35.85, -86.66], 7);
     var markers;
     var data;
-    var selectedLocation;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -26,12 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Handle click event on marker
                     marker.on('click', function () {
                         var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
-                        if (teamsAtLocation.length > 1) {
-                            clearSidebar();
-                            updateSidebar(teamsAtLocation);
-                        } else {
-                            resetSidebar();
-                        }
+                        clearSidebar();
+                        updateSidebar(teamsAtLocation);
                         zoomToTeam(team);
                     });
 
@@ -67,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function resetSidebar() {
-        selectedLocation = null;
         // Clear existing teams in the sidebar
         document.getElementById('teamInfo').innerHTML = '';
 
@@ -93,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to get teams at a specific location
     function getTeamsAtLocation(lat, lon) {
-        selectedLocation = { lat, lon };
         return data.filter(team => team.lat === lat && team.lon === lon);
     }
 
