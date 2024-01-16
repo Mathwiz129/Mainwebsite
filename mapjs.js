@@ -58,10 +58,11 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchData();
 
     document.body.addEventListener('click', function (event) {
-        if (!event.target.closest('#mapside')) {
+        if (!event.target.closest('#map') && !event.target.closest('#mapside')) {
             resetSidebar();
         }
     });
+    
     function clearSidebar() {
             document.getElementById('teamInfo').innerHTML = '';
         }
