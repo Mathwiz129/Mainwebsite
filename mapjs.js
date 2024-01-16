@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var map = L.map('map').setView([35.85, -86.66], 7);
     var markers;
     var data;
+    var selectedLocation;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -25,7 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Handle click event on marker
                     marker.on('click', function () {
                         var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
-                        updateSidebar(teamsAtLocation);
+                        if (teamsAtLocation.length > 1) {
+                            clearSidebar();
+                            updateSidebar(teamsAtLocation);
+                        } else {
+                            resetSidebar();
+                        }
                         zoomToTeam(team);
                     });
 
@@ -58,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function resetSidebar() {
+        selectedLocation = null;
         // Clear existing teams in the sidebar
         document.getElementById('teamInfo').innerHTML = '';
 
@@ -68,10 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function updateSidebar(teams) {
+    function clearSidebar() {
         // Clear existing teams in the sidebar
         document.getElementById('teamInfo').innerHTML = '';
+    }
 
+    function updateSidebar(teams) {
         // Populate the sidebar with teams at the specified location
         teams.forEach(function (team) {
             var teamBox = createTeamBox(team);
@@ -81,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to get teams at a specific location
     function getTeamsAtLocation(lat, lon) {
+        selectedLocation = { lat, lon };
         return data.filter(team => team.lat === lat && team.lon === lon);
     }
 
