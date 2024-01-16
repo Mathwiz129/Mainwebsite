@@ -1,18 +1,19 @@
 [
-    {
-      "name": "Team A",
-      "lat": 36.1627,
-      "lon": -86.7816,
-      "stats": "Stats for Team A",
-      "website": "https://teamAwebsite.com"
-    },
-    {
-      "name": "Team B",
-      "lat": 35.0456,
-      "lon": -89.9836,
-      "stats": "Stats for Team B",
-      "website": "https://teamBwebsite.com"
-    }
-    
-  ]
-  
+  {
+    "name": "Team A",
+    "city": "Nashville",
+    "state": "Tennessee",
+    "areaCode": "37211",
+    "stats": "Stats for Team A",
+    "website": "https://teamAwebsite.com"
+  },
+  {
+    "name": "Team B",
+    "city": "Memphis",
+    "state": "Tennessee",
+    "areaCode": "38103",
+    "stats": "Stats for Team B",
+    "website": "https://teamBwebsite.com"
+  }
+ 
+]
