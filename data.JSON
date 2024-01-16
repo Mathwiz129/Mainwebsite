@@ -1,18 +1,12 @@
 [
   {
-    "name": "Ohm Raiders",
-    "number": "11468",
+    "name": "Team A",
     "lat": 35.0857,
-    "lon": -85.3352,
-    "stats": "Stats for Team A",
-    "website": "https://teamAwebsite.com"
+    "lon": -85.3352
   },
   {
-    "name": "other team",
+    "name": "Team B",
     "lat": 35.0456,
-    "lon": -89.9836,
-    "stats": "Stats for Team B",
-    "website": "https://teamBwebsite.com"
+    "lon": -89.9836
   }
-
 ]
