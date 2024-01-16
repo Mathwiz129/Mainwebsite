@@ -10,6 +10,22 @@
     <title>Tennessee FTC Teams Map</title>
     <!-- Custom CSS for map container -->
     <style>
+        body {
+            margin: 0;
+            font-family: Helvetica, Sans-Serif;
+            background-color: #f57e25;
+            overflow: hidden;
+        }
+
+        #title {
+            text-align: center;
+            font-size: 24px;
+            padding: 10px;
+            background-color: #faa835;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
         #map {
             height: 500px;
             width: 60%;
@@ -19,18 +35,11 @@
             border-radius: 40px;
             padding: 10px;
         }
-        body{
-            font-family: Helvetica, Sans-Serif;
-            color: #444444;
-            font-size: 18pt;
-            background-color: #FAFAFA;
-            overflow: hidden; /* Hide overflow to prevent scrolling when sidebar is open */
-            margin: 0;
-        }
+
         #sidebar {
             position: absolute;
             top: 0;
-            left: 0;
+            right: 0;
             height: 100%;
             width: 0;
             background-color: #ffffff;
@@ -39,14 +48,11 @@
             padding-top: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        #map, #sidebar {
-            float: left;
-        }
     </style>
 </head>
-<body style="background-color:#f57e25;">
+<body>
 
-<h1>Tennessee FTC Teams Map</h1>
+<div id="title">Tennessee FTC Teams Map</div>
 
 <div id="map"></div>
 <div id="sidebar"></div>
@@ -72,16 +78,16 @@
                 marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Stats: ${team.stats}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
 
                 // Handle click event on marker
-                marker.on('click', function() {
+                marker.on('click', function () {
                     openSidebar(team);
                 });
 
                 // Handle hover events
-                marker.on('mouseover', function() {
+                marker.on('mouseover', function () {
                     marker.openPopup();
                 });
 
-                marker.on('mouseout', function() {
+                marker.on('mouseout', function () {
                     marker.closePopup();
                 });
             });
