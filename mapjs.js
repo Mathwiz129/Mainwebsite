@@ -1,52 +1,61 @@
-var map = L.map('map').setView([35.85, -86.66], 7);
+// mapjs.js
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var map = L.map('map').setView([35.85, -86.66], 7);
     var markers;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Fetch data from the JSON file
-    fetch('data.JSON')
-        .then(response => response.json())
-        .then(data => {
-            // Add markers for each robotics team
-            markers = L.layerGroup().addTo(map);
+    function fetchData() {
+        // Fetch data from the JSON file
+        fetch('data.JSON')
+            .then(response => response.json())
+            .then(data => {
+                // Add markers for each robotics team
+                markers = L.layerGroup().addTo(map);
 
-            data.forEach(function (team) {
-                var marker = L.marker([team.lat, team.lon]).addTo(markers);
+                data.forEach(function (team) {
+                    var marker = L.marker([team.lat, team.lon]).addTo(markers);
 
-                // Customize the popup content with team information
-                marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
+                    // Customize the popup content with team information
+                    marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
 
-                // Handle click event on marker
-                marker.on('click', function () {
-                    zoomToTeam(team);
+                    // Handle click event on marker
+                    marker.on('click', function () {
+                        zoomToTeam(team);
+                    });
+
+                    // Handle hover events
+                    marker.on('mouseover', function () {
+                        marker.openPopup();
+                    });
+
+                    marker.on('mouseout', function () {
+                        marker.closePopup();
+                    });
+
+                    // Add team information to the team info box
+                    var teamBox = createTeamBox(team);
+                    teamBox.addEventListener('click', function () {
+                        zoomToTeam(team);
+                    });
+
+                    document.getElementById('teamInfo').appendChild(teamBox);
                 });
 
-                // Handle hover events
-                marker.on('mouseover', function () {
-                    marker.openPopup();
+                // Close sidebar when clicking on map background
+                map.on('click', function () {
+                    resetSidebar();
                 });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
 
-                marker.on('mouseout', function () {
-                    marker.closePopup();
-                });
-
-                // Add team information to the team info box
-                var teamBox = createTeamBox(team);
-                teamBox.addEventListener('click', function () {
-                    zoomToTeam(team);
-                });
-
-                document.getElementById('teamInfo').appendChild(teamBox);
-            });
-
-            // Close sidebar when clicking on map background
-            map.on('click', function () {
-                resetSidebar();
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
+    // Call the fetchData function
+    fetchData();
 
     // Add an event listener to the map for clicks
     map.on('click', function () {
@@ -104,3 +113,7 @@ var map = L.map('map').setView([35.85, -86.66], 7);
         map.setView([35.85, -86.66], 7);
         resetSidebar(); // Reset sidebar when clicking the reset map button
     }
+
+    // Expose necessary functions or variables globally if needed
+    window.resetMap = resetMap;
+});
