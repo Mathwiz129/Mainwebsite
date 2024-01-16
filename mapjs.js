@@ -58,18 +58,21 @@ document.addEventListener('DOMContentLoaded', function () {
             resetSidebar();
         }
     });
-
+    function clearSidebar() {
+            document.getElementById('teamInfo').innerHTML = '';
+        }
     function resetSidebar() {
-        document.getElementById('teamInfo').innerHTML = '';
+        clearSidebar();
 
         data.forEach(function (team) {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
     }
-
+    
     function updateSidebar(teams) {
-        document.getElementById('teamInfo').innerHTML = '';
+        clearSidebar()
+        console.error('clear sidebar', error)
         
         teams.forEach(function (team) {
             var teamBox = createTeamBox(team);
