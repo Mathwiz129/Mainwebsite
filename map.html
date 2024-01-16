@@ -34,21 +34,10 @@
     fetch('data.JSON')
         .then(response => response.json())
         .then(data => {
-            // Create a dictionary to store teams at the same location
-            var teamDictionary = {};
-
             // Add markers for each robotics team
             var markers = L.layerGroup().addTo(map);
 
             data.forEach(function (team) {
-                var key = team.lat + "_" + team.lon;
-
-                if (teamDictionary[key] === undefined) {
-                    teamDictionary[key] = [];
-                }
-
-                teamDictionary[key].push(team);
-
                 var marker = L.marker([team.lat, team.lon]).addTo(markers);
 
                 // Customize the popup content with team information
@@ -56,7 +45,8 @@
 
                 // Handle click event on marker
                 marker.on('click', function () {
-                    showTeamsAtLocation(key);
+                    zoomToTeam(team);
+                    resetSidebar(); // Reset sidebar when clicking on a marker
                 });
 
                 // Handle hover events
@@ -67,66 +57,57 @@
                 marker.on('mouseout', function () {
                     marker.closePopup();
                 });
+
+                // Add team information to the team info box
+                var teamBox = createTeamBox(team);
+                teamBox.addEventListener('click', function () {
+                    zoomToTeam(team);
+                });
+
+                document.getElementById('teamInfo').appendChild(teamBox);
             });
-
-            function showAllTeams() {
-                var teamInfoBox = document.getElementById('teamInfo');
-                teamInfoBox.innerHTML = '';
-
-                data.forEach(function (team) {
-                    var teamBox = document.createElement('div');
-                    teamBox.className = 'teamBox';
-                    teamBox.innerHTML = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
-                    teamBox.addEventListener('click', function () {
-                        zoomToTeam(team);
-                    });
-
-                    teamInfoBox.appendChild(teamBox);
-                });
-            }
-
-            function showTeamsAtLocation(key) {
-                var teams = teamDictionary[key];
-
-                // Update the team info box with teams at the same location
-                var teamInfoBox = document.getElementById('teamInfo');
-                teamInfoBox.innerHTML = '';
-
-                teams.forEach(function (team) {
-                    var teamBox = document.createElement('div');
-                    teamBox.className = 'teamBox';
-                    teamBox.innerHTML = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
-                    teamBox.addEventListener('click', function () {
-                        zoomToTeam(team);
-                    });
-
-                    teamInfoBox.appendChild(teamBox);
-                });
-            }
-
-            // Show all teams initially
-            showAllTeams();
 
             // Close sidebar when clicking on map background
             map.on('click', function () {
-                clearHighlight();
-            });
-
-            // Close sidebar when clicking outside the map or on the map
-            document.addEventListener('click', function (event) {
-                if (!event.target.closest('#mapside')) {
-                    clearHighlight();
-                }
-            });
-
-            // Close sidebar when clicking on the blank space of the team sidebar
-            document.getElementById('teamInfo').addEventListener('click', function (event) {
-                if (event.target.id === 'teamInfo') {
-                    clearHighlight();
-                }
+                resetSidebar();
             });
         })
         .catch(error => console.error('Error fetching data:', error));
+
+    // Add an event listener to the map for clicks
+    map.on('click', function () {
+        resetSidebar();
+    });
+
+    // Add an event listener to the document body for clicks outside the map
+    document.body.addEventListener('click', function (event) {
+        if (!event.target.closest('#mapside')) {
+            resetSidebar();
+        }
+    });
+
+    function resetSidebar() {
+        // Clear existing teams in the sidebar
+        document.getElementById('teamInfo').innerHTML = '';
+
+        // Populate the sidebar with all teams
+        data.forEach(function (team) {
+            var teamBox = createTeamBox(team);
+            document.getElementById('teamInfo').appendChild(teamBox);
+        });
+    }
+
+    // Function to create a team box (reuse it for initial population)
+    function createTeamBox(team) {
+        var teamBox = document.createElement('div');
+        teamBox.className = 'teamBox';
+        teamBox.innerHTML = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
+        teamBox.addEventListener('click', function () {
+            zoomToTeam(team);
+        });
+
+        return teamBox;
+    }
 
     function zoomToTeam(team) {
         map.setView([team.lat, team.lon], 15);  // Zoom to the selected team's location
@@ -138,16 +119,19 @@
             marker.closePopup();
         });
 
-        // Show all teams in the sidebar
-        showAllTeams();
+        // Clear highlight in the team info box
+        var teamBoxes = document.getElementsByClassName('teamBox');
+        Array.from(teamBoxes).forEach(box => {
+            box.style.backgroundColor = '#f8f8f8';
+        });
     }
 
     function resetMap() {
         map.setView([35.85, -86.66], 7);
-        // Show all teams when resetting the map
-        showAllTeams();
+        resetSidebar(); // Reset sidebar when clicking the reset map button
     }
 </script>
+
 
 </body>
 </html>
