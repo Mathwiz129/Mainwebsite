@@ -25,6 +25,7 @@
 
 <script>
     var map = L.map('map').setView([35.85, -86.66], 7);
+    var markers;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -35,7 +36,7 @@
         .then(response => response.json())
         .then(data => {
             // Add markers for each robotics team
-            var markers = L.layerGroup().addTo(map);
+            markers = L.layerGroup().addTo(map);
 
             data.forEach(function (team) {
                 var marker = L.marker([team.lat, team.lon]).addTo(markers);
@@ -46,7 +47,6 @@
                 // Handle click event on marker
                 marker.on('click', function () {
                     zoomToTeam(team);
-                    resetSidebar(); // Reset sidebar when clicking on a marker
                 });
 
                 // Handle hover events
@@ -131,6 +131,7 @@
         resetSidebar(); // Reset sidebar when clicking the reset map button
     }
 </script>
+
 
 
 </body>
