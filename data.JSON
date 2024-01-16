@@ -2,6 +2,7 @@
   {
     "name": "4-H Gear Grinders",
     "number": "18689",
+    "location":"Chattanooga, TN 37416 USA",
     "rookie": "2020",
     "website": "",
     "lat": 35.092990,
@@ -10,6 +11,7 @@
   {
     "name": "Burro Bots",
     "number": "18832",
+    "location":"Nashville, TN 37215 USA",
     "rookie": "2020",
     "website": "",
     "lat": 36.095290,
@@ -18,9 +20,19 @@
   {
     "name": "Cordova Eagles",
     "number": "21673",
+    "location":"Memphis, TN 38103 USA",
     "rookie": "2022",
     "website": "",
     "lat": 35.145700,
     "lon": -90.052630
+  },
+  {
+    "name": "Electric Wave",
+    "number": "7783",
+    "location":"Memphis, TN 38120 USA",
+    "rookie": "2013",
+    "website": "",
+    "lat": 35.118410,
+    "lon": -89.864050
   }
 ]
