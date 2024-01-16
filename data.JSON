@@ -1,12 +1,26 @@
 [
   {
-    "name": "Team A",
-    "lat": 35.0857,
-    "lon": -85.3352
+    "name": "4-H Gear Grinders",
+    "number": "18689",
+    "rookie": "2020",
+    "website": "",
+    "lat": 35.092990,
+    "lon": -85.1831302
   },
   {
-    "name": "Team B",
-    "lat": 35.0456,
-    "lon": -89.9836
+    "name": "Burro Bots",
+    "number": "18832",
+    "rookie": "2020",
+    "website": "",
+    "lat": 36.095290,
+    "lon": -86.824160
+  },
+  {
+    "name": "Cordova Eagles",
+    "number": "21673",
+    "rookie": "2022",
+    "website": "",
+    "lat": 35.145700,
+    "lon": -90.052630
   }
 ]

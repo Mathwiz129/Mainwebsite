@@ -90,7 +90,7 @@
                 var marker = L.marker([team.lat, team.lon]).addTo(markers);
 
                 // Customize the popup content with team information
-                marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Stats: ${team.stats}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
+                marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
 
                 // Handle click event on marker
                 marker.on('click', function () {
@@ -109,7 +109,7 @@
                 // Add team information to the team info box
                 var teamBox = document.createElement('div');
                 teamBox.className = 'teamBox';
-                teamBox.innerHTML = `<b>${team.name}</b><br>Stats: ${team.stats}`;
+                teamBox.innerHTML = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
                 teamBox.addEventListener('click', function () {
                     zoomToTeam(team);
                 });
