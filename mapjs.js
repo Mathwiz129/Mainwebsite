@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // Handle click event on marker
                     marker.on('click', function () {
+                        var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
+                        updateSidebar(teamsAtLocation);
                         zoomToTeam(team);
                     });
 
@@ -77,6 +79,22 @@ document.addEventListener('DOMContentLoaded', function () {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
+    }
+
+    function updateSidebar(teams) {
+        // Clear existing teams in the sidebar
+        document.getElementById('teamInfo').innerHTML = '';
+
+        // Populate the sidebar with teams at the specified location
+        teams.forEach(function (team) {
+            var teamBox = createTeamBox(team);
+            document.getElementById('teamInfo').appendChild(teamBox);
+        });
+    }
+
+    // Function to get teams at a specific location
+    function getTeamsAtLocation(lat, lon) {
+        return data.filter(team => team.lat === lat && team.lon === lon);
     }
 
     // Function to create a team box (reuse it for initial population)
