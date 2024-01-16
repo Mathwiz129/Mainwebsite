@@ -37,14 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     marker.on('mouseout', function () {
                         marker.closePopup();
                     });
-
-                    // Add team information to the team info box
-                    var teamBox = createTeamBox(team);
-                    teamBox.addEventListener('click', function () {
-                        zoomToTeam(team);
-                    });
-
-                    document.getElementById('teamInfo').appendChild(teamBox);
                 });
 
                 // Close sidebar when clicking on map background
@@ -57,11 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Call the fetchData function
     fetchData();
-
-    // Add an event listener to the map for clicks
-    map.on('click', function () {
-        resetSidebar();
-    });
 
     // Add an event listener to the document body for clicks outside the map
     document.body.addEventListener('click', function (event) {
@@ -111,19 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function zoomToTeam(team) {
         map.setView([team.lat, team.lon], 15);  // Zoom to the selected team's location
-    }
-
-    function clearHighlight() {
-        // Clear highlight on the map
-        markers.eachLayer(marker => {
-            marker.closePopup();
-        });
-
-        // Clear highlight in the team info box
-        var teamBoxes = document.getElementsByClassName('teamBox');
-        Array.from(teamBoxes).forEach(box => {
-            box.style.backgroundColor = '#f8f8f8';
-        });
     }
 
     function resetMap() {
