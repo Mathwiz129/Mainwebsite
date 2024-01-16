@@ -18,7 +18,6 @@
             border: 4px solid #000000;
             border-radius: 40px;
             padding: 10px;
-            
         }
         body{
             font-family: Helvetica, Sans-Serif;
@@ -58,9 +57,7 @@
             // Add search control with live highlighting and autocomplete dropdown
             var searchControl = new L.Control.Search({
                 layer: markers,
-                propertyName: function (layer) {
-                    return layer.feature.properties.name.toLowerCase();
-                },
+                propertyName: 'name',
                 marker: false,
                 moveToLocation: function (latlng, title, map) {
                     map.setView(latlng, 15); // Adjust the zoom level as needed
@@ -78,9 +75,6 @@
         })
         .catch(error => console.error('Error fetching data:', error));
 </script>
-
-
-
 
 </body>
 </html>
