@@ -63,13 +63,13 @@
     "lon": "-86.952610"
   },
   {
-    "name": "(should be lynx but test for multi)",
+    "name": "Lynx Robotics",
     "number": "18714",
     "location": "Nashville, TN 37221 USA",
     "rookie": "2020",
     "website": "",
-    "lat": "36.068030",
-    "lon": "-86.952610"
+    "lat": "35.118410",
+    "lon": "-89.864050"
   },
   {
     "name": "MAGNETUDE BLACK",
@@ -77,8 +77,8 @@
     "location": "Murfreesboro, TN 37130 USA",
     "rookie": "2019",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.861130",
+    "lon": "-86.361160"
   },
   {
     "name": "MAGNETUDE GOLD",
@@ -86,8 +86,8 @@
     "location": "Murfreesboro, TN 37130 USA",
     "rookie": "2019",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.861130",
+    "lon": "-86.361160"
   },
   {
     "name": "MUS Robotics",
@@ -95,8 +95,8 @@
     "location": "Memphis, TN 38119 USA",
     "rookie": "2012",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.082500",
+    "lon": "-89.849330"
   },
   {
     "name": "Ministry of Mechanics",
@@ -104,8 +104,8 @@
     "location": "Cleveland, TN 37312 USA",
     "rookie": "2022",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.212770",
+    "lon": "-84.857780"
   },
   {
     "name": "Ohm Raiders",
@@ -113,8 +113,8 @@
     "location": "Chattanooga, TN 37405 USA",
     "rookie": "2016",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.087009",
+    "lon": "-85.320122"
   },
   {
     "name": "SHARP",
@@ -122,8 +122,8 @@
     "location": "Spring Hill, TN 37174 USA",
     "rookie": "2014",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.737870",
+    "lon": "-86.908510"
   },
   {
     "name": "Small Town Robotics",
@@ -131,8 +131,8 @@
     "location": "Shelbyville, TN 37160 USA",
     "rookie": "2017",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.482710",
+    "lon": "-86.461930"
   },
   {
     "name": "SoKno Robo Junior",
@@ -140,8 +140,8 @@
     "location": "Knoxville, TN 37920 USA",
     "rookie": "2020",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.929460",
+    "lon": "-83.890620"
   },
   {
     "name": "Soaring Hawks",
@@ -158,8 +158,8 @@
     "location": "Brentwood, TN 37027 USA",
     "rookie": "2017",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.932560",
+    "lon": "-84.165040"
   },
   {
     "name": "Techalorians",
@@ -167,8 +167,8 @@
     "location": "Cordova, TN 38016 USA",
     "rookie": "2022",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "35.178290",
+    "lon": "-89.779960"
   },
   {
     "name": "Techno Geckos",
@@ -176,7 +176,7 @@
     "location": "Watauga, TN 37694 USA",
     "rookie": "2023",
     "website": "",
-    "lat": "",
-    "lon": ""
+    "lat": "36.388310",
+    "lon": "-82.274410"
   }
 ]
