@@ -25,8 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Handle click event on marker
                     marker.on('click', function () {
                         var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
-                        clearSidebar();
-                        updateSidebar(teamsAtLocation);
+                        resetSidebar();
+                        if (teamsAtLocation.length > 1) {
+                            updateSidebar(teamsAtLocation);
+                        } else {
+                            updateSidebar([team]);
+                        }
                         zoomToTeam(team);
                     });
 
@@ -70,11 +74,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
-    }
-
-    function clearSidebar() {
-        // Clear existing teams in the sidebar
-        document.getElementById('teamInfo').innerHTML = '';
     }
 
     function updateSidebar(teams) {
