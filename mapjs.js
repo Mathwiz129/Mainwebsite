@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Reset sidebar when the page is loaded
-    resetSidebar();
+    // Fetch data and initialize the map
+    fetchData();
 
     function fetchData() {
         // Fetch data from the JSON file
@@ -17,52 +17,54 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(dataResponse => {
                 data = dataResponse;
-                // Add markers for each robotics team
-                markers = L.layerGroup().addTo(map);
-
-                data.forEach(function (team) {
-                    var marker = L.marker([team.lat, team.lon]).addTo(markers);
-
-                    // Handle click event on marker
-                    marker.on('click', function () {
-                        var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
-                        clearSidebar();
-
-                        if (teamsAtLocation.length > 1) {
-                            updateSidebar(teamsAtLocation);
-                            selectedLocation = { lat: team.lat, lon: team.lon };
-                        } else {
-                            updateSidebar([team]);
-                            selectedLocation = null;
-                        }
-
-                        zoomToTeam(team);
-                    });
-
-                    // Handle hover events
-                    marker.on('mouseover', function () {
-                        marker.openPopup();
-                    });
-
-                    marker.on('mouseout', function () {
-                        marker.closePopup();
-                    });
-                });
-
-                // Close sidebar when clicking on map background
-                map.on('click', function () {
-                    resetSidebar();
-                    selectedLocation = null;
-                });
-
-                // Initial population of sidebar with all teams
-                resetSidebar();
+                // Initialize the map with markers
+                initializeMap();
             })
             .catch(error => console.error('Error fetching data:', error));
     }
 
-    // Call the fetchData function
-    fetchData();
+    function initializeMap() {
+        // Add markers for each robotics team
+        markers = L.layerGroup().addTo(map);
+
+        data.forEach(function (team) {
+            var marker = L.marker([team.lat, team.lon]).addTo(markers);
+
+            // Handle click event on marker
+            marker.on('click', function () {
+                var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
+                clearSidebar();
+
+                if (teamsAtLocation.length > 1) {
+                    updateSidebar(teamsAtLocation);
+                    selectedLocation = { lat: team.lat, lon: team.lon };
+                } else {
+                    updateSidebar([team]);
+                    selectedLocation = null;
+                }
+
+                zoomToTeam(team);
+            });
+
+            // Handle hover events
+            marker.on('mouseover', function () {
+                marker.openPopup();
+            });
+
+            marker.on('mouseout', function () {
+                marker.closePopup();
+            });
+        });
+
+        // Close sidebar when clicking on map background
+        map.on('click', function () {
+            resetSidebar();
+            selectedLocation = null;
+        });
+
+        // Initial population of sidebar with all teams
+        resetSidebar();
+    }
 
     // Add an event listener to the document body for clicks outside the map
     document.body.addEventListener('click', function (event) {
