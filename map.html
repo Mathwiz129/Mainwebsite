@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-search@2.9.9/dist/leaflet-search.min.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-search@2.9.9/dist/leaflet-search.min.js"></script>
-
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tennessee FTC Teams Map</title>
@@ -20,7 +20,7 @@
             border-radius: 40px;
             padding: 10px;
         }
-        body{
+        body {
             font-family: Helvetica, Sans-Serif;
             color: #444444;
             font-size: 18pt;
@@ -64,7 +64,7 @@
         marker.bindPopup(`<b>${team.name}</b>`);
     });
 
-    // Add search control without filtering
+    // Add search control with dropdown
     var searchControl = new L.Control.Search({
         layer: markers,
         propertyName: 'name',
@@ -72,8 +72,14 @@
         moveToLocation: function (latlng, title, map) {
             map.setView(latlng, 15);
         },
+        filterData: function (text, records) {
+            return records.filter(function (record) {
+                return record.name.toLowerCase().includes(text.toLowerCase());
+            });
+        },
         autoType: false,
         autoCollapse: true,
+        container: 'searchBar', // Specify the input element for the search control
     });
 
     map.addControl(searchControl);
