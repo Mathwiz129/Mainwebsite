@@ -21,9 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     marker.on('click', function () {
                         var latlng = marker.getLatLng();
+                        console.log('Marker Clicked:');
+                        console.log('Coordinates:', latlng);
+                        
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
+                        console.log('Teams at Location:', teamsAtLocation);
+                    
                         resetSidebar();
-
+                    
                         if (teamsAtLocation.length > 0) {
                             updateSidebar(teamsAtLocation);
                         } else {
