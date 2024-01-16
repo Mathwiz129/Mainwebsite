@@ -55,7 +55,7 @@
                 marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Stats: ${team.stats}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
             });
 
-            // Add search control
+            // Add search control with live highlighting and autocomplete dropdown
             var searchControl = new L.Control.Search({
                 layer: markers,
                 propertyName: function (layer) {
@@ -64,14 +64,21 @@
                 marker: false,
                 moveToLocation: function (latlng, title, map) {
                     map.setView(latlng, 15); // Adjust the zoom level as needed
-                }
+                },
+                filterData: function (text, records) {
+                    return records.filter(function (record) {
+                        return record.name.toLowerCase().includes(text.toLowerCase());
+                    });
+                },
+                autoType: false, // Disable auto-type behavior
+                autoCollapse: true, // Collapse the search control on selecting a result
             });
-
 
             map.addControl(searchControl);
         })
         .catch(error => console.error('Error fetching data:', error));
 </script>
+
 
 
 
