@@ -13,22 +13,22 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(dataResponse => {
                 data = dataResponse;
                 markers = L.layerGroup().addTo(map);
-
+    
                 data.forEach(function (team) {
                     var marker = L.marker([team.lat, team.lon]).addTo(markers);
-
+    
                     marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
-
+    
                     marker.on('click', function () {
                         var latlng = marker.getLatLng();
                         console.log('Marker Clicked:');
                         console.log('Coordinates:', latlng);
-                        
+    
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
                         console.log('Teams at Location:', teamsAtLocation);
-                    
+    
                         resetSidebar();
-                    
+    
                         if (teamsAtLocation.length > 0) {
                             updateSidebar(teamsAtLocation);
                         } else {
@@ -36,20 +36,24 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                         zoomToTeam(team);
                     });
-
+    
                     marker.on('mouseover', function () {
                         marker.openPopup();
                     });
-
+    
                     marker.on('mouseout', function () {
                         marker.closePopup();
                     });
                 });
-
+    
                 resetSidebar();
             })
-            .catch(error => console.error('Error fetching data:', error));
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                // Handle the error here, e.g., display an error message to the user
+            });
     }
+    
 
     fetchData();
 
