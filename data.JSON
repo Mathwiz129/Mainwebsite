@@ -1,21 +1,17 @@
 [
-    {
-      "name": "Ohm Raiders",
-      "number": 11468,
-      "lat": 35.085758,
-      "lon": -85.335228,
-      "rookie": "2016",
-      "website": "https://ohmraiders11468.wixsite.com/mysite"
-    },
-    {
-      "name": "Ohm Raiders",
-      "number": 11468,
-      "lat": 36.085758,
-      "lon": -85.335228,
-      "rookie": "2016",
-      "website": "https://ohmraiders11468.wixsite.com/mysite"
-    }
+  {
+    "name": "Team 11",
+    "lat": 36.1627,
+    "lon": -86.7816,
+    "stats": "Stats for Team A",
+    "website": "https://teamAwebsite.com"
+  },
+  {
+    "name": "Team B",
+    "lat": 35.0456,
+    "lon": -89.9836,
+    "stats": "Stats for Team B",
+    "website": "https://teamBwebsite.com"
+  }
 
-
-  ]
-  
+]
