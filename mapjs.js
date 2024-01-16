@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
+    // Reset sidebar when the page is loaded
+    resetSidebar();
+
     function fetchData() {
         // Fetch data from the JSON file
         fetch('data.JSON')
@@ -25,12 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Handle click event on marker
                     marker.on('click', function () {
                         var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
-                        resetSidebar();
-                        if (teamsAtLocation.length > 1) {
-                            updateSidebar(teamsAtLocation);
-                        } else {
-                            updateSidebar([team]);
-                        }
+                        clearSidebar();
+                        updateSidebar(teamsAtLocation);
                         zoomToTeam(team);
                     });
 
@@ -74,6 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
+    }
+
+    function clearSidebar() {
+        // Clear existing teams in the sidebar
+        document.getElementById('teamInfo').innerHTML = '';
     }
 
     function updateSidebar(teams) {
