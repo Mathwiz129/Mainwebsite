@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateSidebar(team) {
         clearSidebar();
 
-        teams.forEach(function (team) {
+        team.forEach(function (team) {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
