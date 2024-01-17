@@ -46,13 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
                     
                         clearSidebar();
-                    
-                        if (teamsAtLocation.length > 0) {
-                            updateSidebar(teamsAtLocation);
-                        } else {
-                            resetSidebar();
-                        }
-                    
+                        updateSidebar(teamsAtLocation);
+                        
                         zoomToTeam(team);
                     });
                 });
