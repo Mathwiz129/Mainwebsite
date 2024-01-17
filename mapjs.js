@@ -86,10 +86,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function updateSidebar(teams) {
+    function updateSidebar(team) {
+        var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
         clearSidebar();
-
-        teams.forEach(function (team) {
+    
+        teamsAtLocation.forEach(function (team) {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
