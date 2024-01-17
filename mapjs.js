@@ -51,10 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             clearSidebar();
                             var teamBox = createTeamBox(team);
                             document.getElementById('teamInfo').appendChild(teamBox);
-                        } else {
-                            updateSidebar(teams)
+                        } 
+                        if (teamsAtLocation.length > 1) {
+                            resetSidebar()
                         }
-                    
+
                         zoomToTeam(team);
                     });
                 });
