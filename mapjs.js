@@ -45,9 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         var latlng = marker.getLatLng();
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
                     
-                        clearSidebar();
-                        updateSidebar(teamsAtLocation);
-                        
+                        resetSidebar();
+                    
+                        if (teamsAtLocation.length == 1) {
+                            clearSidebar();
+                            var teamBox = createTeamBox(team);
+                            document.getElementById('teamInfo').appendChild(teamBox);
+                        } else {
+                            updateSidebar(team)
+                        }
+                    
                         zoomToTeam(team);
                     });
                 });
@@ -80,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function updateSidebar(teams) {
+    function updateSidebar(team) {
         clearSidebar();
 
         teams.forEach(function (team) {
