@@ -178,5 +178,95 @@
     "website": "",
     "lat": "36.388310",
     "lon": "-82.274410"
+  },
+  {
+    "name": "Tennessee Robotettes (Girls)",
+    "number": "23866",
+    "location": "Murfreesboro, TN 37130 USA",
+    "rookie": "2023",
+    "website": "",
+    "lat": "35.861130",
+    "lon": "-86.361160"
+  },
+  {
+    "name": "Tennessee Robotics Club (Blue)",
+    "number": "23867",
+    "location": "Murfreesboro, TN 37130 USA",
+    "rookie": "2023",
+    "website": "",
+    "lat": "35.861130",
+    "lon": "-86.361160"
+  },
+  {
+    "name": "Tennessee Robotics Club (Red)",
+    "number": "11161",
+    "location": "Murfreesboro, TN 37130 USA",
+    "rookie": "2016",
+    "website": "",
+    "lat": "35.861130",
+    "lon": "-86.361160"
+  },
+  {
+    "name": "Tennessine Titans",
+    "number": "21457",
+    "location": "Maryville, TN 37804 USA",
+    "rookie": "2022",
+    "website": "",
+    "lat": "35.777140",
+    "lon": "-83.925500"
+  },
+  {
+    "name": "The Memphis Girl MechWarriors",
+    "number": "23893",
+    "location": "Memphis, TN 38111 USA",
+    "rookie": "2023",
+    "website": "",
+    "lat": "35.111470",
+    "lon": "-89.948880"
+  },
+  {
+    "name": "TriCities Youth Robotics",
+    "number": "21461",
+    "location": "Johnson City, TN 37604 USA",
+    "rookie": "2022",
+    "website": "",
+    "lat": "36.314950",
+    "lon": "-82.386160"
+  },
+  {
+    "name": "Warriors",
+    "number": "4949",
+    "location": "Knoxville, TN 37923 USA",
+    "rookie": "2011",
+    "website": "",
+    "lat": "35.923460",
+    "lon": "-84.080870"
+  },
+  {
+    "name": "Webb Robotics - FTC",
+    "number": "9934",
+    "location": "Knoxville, TN 37923 USA",
+    "rookie": "2015",
+    "website": "",
+    "lat": "35.923460",
+    "lon": "-84.080870"
+  },
+  {
+    "name": "Whites Creek",
+    "number": "16885",
+    "location": "Whites Creek, TN 37189 USA",
+    "rookie": "2019",
+    "website": "",
+    "lat": "36.264850",
+    "lon": "-86.830810"
+  },
+  {
+    "name": "hivemind",
+    "number": "23396",
+    "location": "Spring Hill, TN 37174 USA",
+    "rookie": "2023",
+    "website": "",
+    "lat": "35.737870",
+    "lon": "-86.908510"
   }
-]
+]   
