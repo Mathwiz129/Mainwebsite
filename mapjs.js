@@ -27,7 +27,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         marker.bindTooltip(teamCountDiv, { permanent: true }).openTooltip();
                     }
 
-                    marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
+                    // Format HTML string for multiple teams at the location
+                    var popupContent = '';
+                    teamsAtLocation.forEach(function (team) {
+                        popupContent += `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a><br><br>`;
+                    });
+
+                    marker.bindPopup(popupContent);
 
                     marker.on('mouseover', function () {
                         clearTimeout(popupTimeout); // Clear any existing timeout
@@ -44,9 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     marker.on('click', function () {
                         var latlng = marker.getLatLng();
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
-                    
+
                         resetSidebar();
-                    
+
                         if (teamsAtLocation.length > 0) {
                             updateSidebar(teamsAtLocation);
                         } else {
@@ -84,10 +90,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function updateSidebar(team) {
+    function updateSidebar(teams) {
         clearSidebar();
 
-        team.forEach(function (team) {
+        teams.forEach(function (team) {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
