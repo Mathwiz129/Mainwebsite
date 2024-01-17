@@ -41,8 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         marker.openPopup();
                     });
     
-                    marker.on('mouseout', function () {
-                        marker.closePopup();
+                    marker.on('mouseover', function () {
+                        marker.openPopup();
+                        var popup = marker.getPopup();
+                        popup.on('mouseout', function () {
+                            marker.closePopup();
+                        });
                     });
                 });
     
