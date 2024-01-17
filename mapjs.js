@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var teamNames = teamsAtLocation.map(team => team.name);
 
                     // Format HTML string for multiple teams at the location
-                    var popupContent = teamsAtLocation.length > 1 ? teamNames.join('<br>') : `<b>${team.name}</b>`;
+                    var popupContent = teamsAtLocation.length > 1 ? `<b>${teamNames.join('</b><br>')}</b><br>Team Number: ${team.number}` : `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
 
                     marker.bindPopup(popupContent);
 
