@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var markers;
     var data;
     var popupTimeout;
+    var selectedTeam = null;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -53,13 +54,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         var latlng = marker.getLatLng();
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
 
-                        resetSidebar();
-
-                        if (teamsAtLocation.length > 0) {
+                        if (selectedTeam !== team) {
+                            resetSidebar();
                             updateSidebar(teamsAtLocation);
+                            selectedTeam = team;
                         } else {
                             resetSidebar();
+                            selectedTeam = null;
                         }
+
                         zoomToTeam(team);
                     });
                 });
@@ -103,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.addEventListener('click', function (event) {
         if (!event.target.closest('#map') && !event.target.closest('#mapside')) {
             resetSidebar();
+            selectedTeam = null;
         }
     });
 
@@ -137,8 +141,11 @@ document.addEventListener('DOMContentLoaded', function () {
         teamBox.className = 'teamBox';
         teamBox.innerHTML = `<b>${team.name}</b><br>${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
         teamBox.addEventListener('click', function () {
-            updateSidebar();
-            zoomToTeam(team);
+            if (selectedTeam !== team) {
+                resetSidebar();
+                selectedTeam = team;
+                zoomToTeam(team);
+            }
         });
 
         return teamBox;
@@ -151,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function resetMap() {
         map.setView([35.85, -86.66], 7);
         resetSidebar();
+        selectedTeam = null;
     }
 
     window.resetMap = resetMap;
