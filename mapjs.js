@@ -44,16 +44,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     marker.on('click', function () {
                         var latlng = marker.getLatLng();
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
-                    
                         resetSidebar();
-                    
                         if (teamsAtLocation.length == 1) {
                             clearSidebar();
                             var teamBox = createTeamBox(team);
                             document.getElementById('teamInfo').appendChild(teamBox);
-                        } 
+                        }
                         if (teamsAtLocation.length > 1) {
-                            resetSidebar()
+                            updateSidebar()
                         }
 
                         zoomToTeam(team);
