@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             document.getElementById('teamInfo').appendChild(teamBox);
                         }
                         if (teamsAtLocation.length > 1) {
-                            updateSidebar(teamsAtLocation)
+                            updateSidebar(team)
                         }
 
                         zoomToTeam(team);
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function updateSidebar(teamsAtLocation) {
+    function updateSidebar(teams) {
         clearSidebar();
 
         teams.forEach(function (team) {
