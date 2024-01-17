@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                         clearSidebar();
                     
-                        if (teamsAtLocation.length > 1) {
+                        if (teamsAtLocation.length > 0) {
                             updateSidebar(teamsAtLocation);
                         } else {
                             resetSidebar();
