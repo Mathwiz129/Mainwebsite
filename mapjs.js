@@ -44,16 +44,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     marker.on('click', function () {
                         var latlng = marker.getLatLng();
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
+                    
                         resetSidebar();
+                    
                         if (teamsAtLocation.length == 1) {
-                            clearSidebar();
-                            var teamBox = createTeamBox(team);
-                            document.getElementById('teamInfo').appendChild(teamBox);
+                            updateSidebar(teamsAtLocation);  // Use updateSidebar for single team
+                        } else if (teamsAtLocation.length > 1) {
+                            updateSidebar(teamsAtLocation);
                         }
-                        if (teamsAtLocation.length > 1) {
-                            updateSidebar(team)
-                        }
-
+                    
                         zoomToTeam(team);
                     });
                 });
