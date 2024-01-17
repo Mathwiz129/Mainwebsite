@@ -39,6 +39,19 @@ document.addEventListener('DOMContentLoaded', function () {
                             marker.closePopup();
                         }, 500); // Set a timeout of 0.5 seconds
                     });
+
+                    // Click event for zooming and displaying sidebar
+                    marker.on('click', function () {
+                        var latlng = marker.getLatLng();
+                        var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
+                        resetSidebar();
+                        if (teamsAtLocation.length > 0) {
+                            updateSidebar(teamsAtLocation);
+                        } else {
+                            resetSidebar();
+                        }
+                        zoomToTeam(team);
+                    });
                 });
 
                 resetSidebar();
