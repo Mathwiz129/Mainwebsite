@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var map = L.map('map').setView([35.85, -86.66], 7);
     var markers;
     var data;
+    var popupTimeout;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -27,6 +28,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     marker.bindPopup(`<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`);
+
+                    marker.on('mouseover', function () {
+                        clearTimeout(popupTimeout); // Clear any existing timeout
+                        marker.openPopup();
+                    });
+
+                    marker.on('mouseout', function () {
+                        popupTimeout = setTimeout(function () {
+                            marker.closePopup();
+                        }, 500); // Set a timeout of 0.5 seconds
+                    });
                 });
 
                 resetSidebar();
