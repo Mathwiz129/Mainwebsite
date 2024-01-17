@@ -71,6 +71,33 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
+    function filterTeams(query) {
+        var filteredData = data.filter(function (team) {
+            return (
+                team.name.toLowerCase().includes(query.toLowerCase()) ||
+                team.number.includes(query) ||
+                team.location.toLowerCase().includes(query.toLowerCase())
+            );
+        });
+
+        return filteredData;
+    }
+
+    function updateMapWithFilteredResults(query) {
+        var filteredTeams = filterTeams(query);
+        resetSidebar();
+        if (filteredTeams.length > 0) {
+            updateSidebar(filteredTeams);
+        }
+    }
+
+    // Add an input event listener for the search bar
+    var searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function () {
+        var searchTerm = searchInput.value.trim();
+        updateMapWithFilteredResults(searchTerm);
+    });
+
     fetchData();
 
     document.body.addEventListener('click', function (event) {
