@@ -47,12 +47,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                         resetSidebar();
                     
-                        if (teamsAtLocation.length == 1) {
-                            updateSidebar(teamsAtLocation);  // Use updateSidebar for single team
-                        } else if (teamsAtLocation.length > 1) {
+                        if (teamsAtLocation.length > 0) {
                             updateSidebar(teamsAtLocation);
+                        } else {
+                            resetSidebar();
                         }
-                    
                         zoomToTeam(team);
                     });
                 });
@@ -86,10 +85,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateSidebar(team) {
-        var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
         clearSidebar();
-    
-        teamsAtLocation.forEach(function (team) {
+
+        teams.forEach(function (team) {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
