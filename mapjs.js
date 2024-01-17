@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         marker.bindTooltip(teamCountDiv, { permanent: true }).openTooltip();
                     }
 
-                    // Create an array to store formatted team names
-                    var formattedTeamNames = teamsAtLocation.map(t => `<b>${t.name}</b>`);
+                    // Create an array to store formatted team names and numbers
+                    var formattedTeams = teamsAtLocation.map(t => `<b>${t.name}</b><br>${t.number}`);
 
                     // Format HTML string for multiple teams at the location
                     var popupContent = teamsAtLocation.length > 1 ?
-                        `${formattedTeamNames.join('<br>')}<br>Team Number: ${team.number}` :
-                        `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
+                        `${formattedTeams.join('<br>')}<br>` :
+                        `<b>${team.name}</b><br>${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
 
                     marker.bindPopup(popupContent);
 
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function createTeamBox(team) {
         var teamBox = document.createElement('div');
         teamBox.className = 'teamBox';
-        teamBox.innerHTML = `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
+        teamBox.innerHTML = `<b>${team.name}</b><br>${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
         teamBox.addEventListener('click', function () {
             zoomToTeam(team);
         });
