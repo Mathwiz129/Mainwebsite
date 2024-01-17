@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.body.addEventListener('click', function (event) {
         if (!event.target.closest('#map') && !event.target.closest('#mapside')) {
-            resetSidebar();
+            updateSidebar();
         }
     });
 
