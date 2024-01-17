@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(dataResponse => {
                 data = dataResponse;
                 markers = L.layerGroup().addTo(map);
-    
+
                 data.forEach(function (team) {
                     var teamsAtLocation = getTeamsAtLocation(team.lat, team.lon);
-    
+
                     var marker = L.marker([team.lat, team.lon]).addTo(markers);
 
                     if (teamsAtLocation.length > 1) {
@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     marker.on('click', function () {
                         var latlng = marker.getLatLng();
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
-    
+
                         resetSidebar();
-    
+
                         if (teamsAtLocation.length > 0) {
                             updateSidebar(teamsAtLocation);
                         } else {
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         zoomToTeam(team);
                     });
                 });
-    
+
                 resetSidebar();
             })
             .catch(error => {
@@ -106,19 +106,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    function clearSidebar() {
+        document.getElementById('teamInfo').innerHTML = '';
+    }
+
     function resetSidebar() {
         clearSidebar();
-    
+
         data.forEach(function (team) {
-            var teamBox = createTeamBox(team);
-            document.getElementById('teamInfo').appendChild(teamBox);
-        });
-    }
-    
-    function updateSidebar(teams) {
-        clearSidebar();
-    
-        teams.forEach(function (team) {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
