@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         marker.bindTooltip(teamCountDiv, { permanent: true }).openTooltip();
                     }
 
+                    // Create an array to store team names
+                    var teamNames = teamsAtLocation.map(team => team.name);
+
                     // Format HTML string for multiple teams at the location
-                    var popupContent = '';
-                    teamsAtLocation.forEach(function (team) {
-                        popupContent += `<b>${team.name}</b><br>Team Number: ${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a><br><br>`;
-                    });
+                    var popupContent = teamsAtLocation.length > 1 ? teamNames.join('<br>') : `<b>${team.name}</b>`;
 
                     marker.bindPopup(popupContent);
 
