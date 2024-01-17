@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             var teamBox = createTeamBox(team);
                             document.getElementById('teamInfo').appendChild(teamBox);
                         } else {
-                            updateSidebar(team)
+                            updateSidebar(teams)
                         }
                     
                         zoomToTeam(team);
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function updateSidebar(team) {
+    function updateSidebar(teams) {
         clearSidebar();
 
         teams.forEach(function (team) {
