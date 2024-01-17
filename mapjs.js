@@ -106,14 +106,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function clearSidebar() {
-        document.getElementById('teamInfo').innerHTML = '';
-    }
-
     function resetSidebar() {
         clearSidebar();
-
+    
         data.forEach(function (team) {
+            var teamBox = createTeamBox(team);
+            document.getElementById('teamInfo').appendChild(teamBox);
+        });
+    }
+    
+    function updateSidebar(teams) {
+        clearSidebar();
+    
+        teams.forEach(function (team) {
             var teamBox = createTeamBox(team);
             document.getElementById('teamInfo').appendChild(teamBox);
         });
