@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         var latlng = marker.getLatLng();
                         var teamsAtLocation = getTeamsAtLocation(latlng.lat, latlng.lng);
                     
-                        resetSidebar();
+                        clearSidebar();
                     
                         if (teamsAtLocation.length > 1) {
                             updateSidebar(teamsAtLocation);
