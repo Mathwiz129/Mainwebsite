@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.body.addEventListener('click', function (event) {
         if (!event.target.closest('#map') && !event.target.closest('#mapside')) {
-            updateSidebar();
+            resetSidebar();
         }
     });
 
@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
         teamBox.className = 'teamBox';
         teamBox.innerHTML = `<b>${team.name}</b><br>${team.number}<br>Location: ${team.location}<br>Rookie Year: ${team.rookie}<br>Website: <a href="${team.website}" target="_blank">${team.website}</a>`;
         teamBox.addEventListener('click', function () {
+            updateSidebar();
             zoomToTeam(team);
         });
 
